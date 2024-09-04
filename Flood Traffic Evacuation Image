@@ -1,1 +1,45 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h> // Include the library for I2C LCD
 
+// Initialize the LCD with its I2C address
+LiquidCrystal_I2C lcd(38, 16, 2); // LCD at address 0x27
+
+// Pin definitions for moisture sensors and LED
+const int moisturesensor1 = A0; // Moisture Sensor 1 connected to
+const int moisturesensor2 = A1; // Moisture Sensor 2 connected to
+const int moisturesensor3 = A2; // Moisture sensor 3 connected to
+const int redLED = 8;
+const int greenLED = 9; // Red LED connected to Digital Pin 9
+
+void setup() {
+  // Initialize the LCD (16 columns and 2 rows)
+  lcd.init();
+  lcd.backlight(); // Turn on the backlight for the LCD
+
+  // set pin modes
+  pinMode(moisturesensor1, INPUT);
+  pinMode(moisturesensor2, INPUT);
+  pinMode(moisturesensor3, INPUT);
+  pinMode(redLED, OUTPUT);
+  Serial.begin(9600); // Start serial communication for debugging
+}
+
+void loop() {
+  // Read moisture levels from sensors
+  int moisture1 = analogRead(moisturesensor1);
+  int moisture2 = analogRead(moisturesensor2);
+  int moisture3 = analogRead(moisturesensor3);
+
+  // Print sensor values to Serial Monitor
+  Serial.print("Moisture Sensor 1: ");
+  Serial.println(moisture1);
+  Serial.print("Moisture Sensor 2: ");
+  Serial.println(moisture2);
+  Serial.print("Moisture Sensor 3: ");
+  Serial.println(moisture3);
+
+  // Determine moisture level
+  // ...
+
+  // ...
+}
